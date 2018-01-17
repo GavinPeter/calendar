@@ -1,0 +1,82 @@
+<!doctype html>
+<html >
+  <head>
+    <meta charset="utf-8">
+    <title>中華民國政府行政機關辦公日曆表</title>
+    <meta name="description" content="中華民國，行政機關，辦公日曆表">
+	<meta name="keywords" content="中華民國政府行政機關辦公日曆表">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="//fullcalendar.io/js/fullcalendar-3.8.0/fullcalendar.css" />	
+	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
+	<script src="//fullcalendar.io/js/fullcalendar-3.8.0/fullcalendar.min.js"></script>
+	<style type="text/css">
+    .fc-day-grid-event .fc-content{ white-space: normal!important; }
+	.fc-today { background: pink !important;}
+	h1 {
+		text-align: center;
+	}
+  </style>
+  <script>
+
+	$(document).ready(function(){
+	//open date 人事總處行事曆Json
+	var site = "http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
+	var url = "https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent('select * from json where url="' + site + '"') + "&format=json"; 
+
+	var holidays = [];
+
+  $.getJSON( url, function(data) {
+  for(var i in data.query.results.json.result.records) {    
+
+    var item = data.query.results.json.result.records[i];   
+
+		if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
+    {
+      holidays.push({ 
+          title : item.name,
+          start  : item.date,
+          allDay: true,
+   	       backgroundColor : "red",
+          borderColor: "red"
+      });
+    }
+	}
+
+  $('#calendar').fullCalendar({
+  	viewRender: function(view,element) {
+    
+    	//民國年月
+   		 var curDate = 	$('#calendar').fullCalendar('getDate');
+      var months = ",1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月".split(",");
+      var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
+      var mon =months[ moment(curDate).format('M')];
+       
+  		$('.fc-left').empty().append("<h2>"+year+ mon+"</h2>");
+ 		 },
+			events: holidays,
+    	eventRender: function (event, element, view) { 
+        // event.start is already a moment.js object
+        // we can apply .format()
+        var dateString = event.start.format("YYYY-MM-DD");
+        
+        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'red');
+        
+     }
+		});
+
+
+	});
+  
+});
+  </script>
+   </head>
+   
+    <body>
+		<h1>中華民國政府行政機關辦公日曆表</h1>
+		<div id='calendar'></div>
+    </body>
+
+</html>
+
+
