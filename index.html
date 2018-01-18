@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8">
     <title>中華民國政府行政機關辦公日曆表</title>
-    <meta name="description" content="中華民國，行政機關，辦公日曆表">
+    <meta name="description" content="中華民國，行政機關，辦公日曆">
 	<meta name="keywords" content="中華民國政府行政機關辦公日曆表">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css" />	
@@ -25,7 +25,7 @@
   <script>
 
 	$(document).ready(function(){
-	//open date 人事總處行事曆Json
+	//open data 人事總處行事曆Json
 	var site = "http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
 	var url = "https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent('select * from json where url="' + site + '"') + "&format=json"; 
 
@@ -88,8 +88,9 @@
    </head>
    
     <body>
-		<h2>中華民國政府行政機關辦公日曆表</h2>
+		<h2>中華民國政府行政機關辦公日曆</h2>
 		<div id='calendar'></div>
+	    	<p><a href="http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002" target="_blank">來源data.ntpc.gov.tw</a></p>
     </body>
 
 </html>
