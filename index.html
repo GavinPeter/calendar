@@ -12,7 +12,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/locale/zh-tw.js"></script>
 	<style type="text/css">
-   // .fc-day-grid-event .fc-content{ white-space: normal!important; }
+    .fc-day-grid-event .fc-content{ white-space: normal!important; }
    //.fc-today { background: pink !important;}
 	.fc-widget-header .fc-sat,
 	.fc-widget-header .fc-sun{
@@ -36,16 +36,24 @@
 
     var item = data.query.results.json.result.records[i];   
 
-		if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
-    {
-      holidays.push({ 
-          title : item.name,
-          start  : item.date,
-          allDay: true,
-   	       backgroundColor : "pink",
-          borderColor: "pink"
-      });
-    }
+	if (item.isHoliday=="是"){
+	      holidays.push({ 
+		  title : item.name,
+		  start  : item.date,
+		  allDay: true,
+		       backgroundColor : "pink",
+		  borderColor: "pink"
+	      });
+	    }else{
+		  holidays.push({ 
+		  title : item.holidayCategory,
+		  start  : item.date,
+		  allDay: true,
+		  textColor: "black",
+		  backgroundColor : "white",
+		  borderColor: "white"
+	      });
+	    }
 	}
 
   $('#calendar').fullCalendar({
@@ -66,7 +74,8 @@
         // we can apply .format()
         var dateString = event.start.format("YYYY-MM-DD");
         
-        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
+	if (event.title!="補行上班日")
+        	$(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
         
      }
 		});
