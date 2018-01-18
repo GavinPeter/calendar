@@ -13,7 +13,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/locale/zh-tw.js"></script>
 	<style type="text/css">
    // .fc-day-grid-event .fc-content{ white-space: normal!important; }
-	.fc-today { background: pink !important;}
+   //.fc-today { background: pink !important;}
 	.fc-widget-header .fc-sat,
 	.fc-widget-header .fc-sun{
 		color:red;
@@ -42,8 +42,8 @@
           title : item.name,
           start  : item.date,
           allDay: true,
-   	       backgroundColor : "red",
-          borderColor: "red"
+   	       backgroundColor : "pink",
+          borderColor: "pink"
       });
     }
 	}
@@ -66,7 +66,7 @@
         // we can apply .format()
         var dateString = event.start.format("YYYY-MM-DD");
         
-        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'red');
+        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
         
      }
 		});
