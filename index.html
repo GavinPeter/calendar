@@ -96,7 +96,7 @@ var workdayStr = function(item){
       var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
       var mon =months[ moment(curDate).format('M')];
        
-  		$('.fc-left').empty().append("<h2>"+year+ mon+"</h2>");
+  		$('.fc-left').empty().append("<h4>"+year+ mon+"</h4>");
  		 },
 			events: holidays,
     	eventRender: function (event, element, view) { 
