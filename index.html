@@ -96,7 +96,7 @@ var workdayStr = function(item){
       var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
       var mon =months[ moment(curDate).format('M')];
        
-  		$('.fc-left').empty().append("<h5>"+year+ mon+"</h5>");
+  		$('.fc-left').empty().append("<b>"+year+ mon+"</b>");
  		 },
 			events: holidays,
     	eventRender: function (event, element, view) { 
@@ -117,7 +117,7 @@ var workdayStr = function(item){
    
     <body>
 		<div id='calendar'></div>
-	    	<p><a href="http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002" target="_blank">來源:data.ntpc.gov.tw</a></p>
+	    	<p><a href="http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002" target="_blank">來源:新北市政府資料開放平台</a></p>
     </body>
 
 </html>
