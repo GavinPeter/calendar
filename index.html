@@ -27,50 +27,76 @@
   </style>
   <script>
 
-	$(document).ready(function(){
+$(document).ready(function(){
 	//open data 人事總處行事曆Json
-	var site = "http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
-	var url = "https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent('select * from json where url="' + site + '"') + "&format=json"; 
+var site = "http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
+var url = "https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent('select * from json where url="' + site + '"') + "&format=json"; 
 
-	var holidays = [];
-
-  $.getJSON( url, function(data) {
-  for(var i in data.query.results.json.result.records) {    
-
-    var item = data.query.results.json.result.records[i];   
-
-	if (item.isHoliday=="是"){
-	      holidays.push({ 
-		  title : item.name,
-		  start  : item.date,
-		  allDay: true,
-		       backgroundColor : "pink",
-		  borderColor: "pink"
-	      });
-	    }else{
-		  holidays.push({ 
+var holidays = [];
+var holidayStr = function(item){				
+  return  { 
+          title : item.name,
+          start  : item.date,
+          allDay: true,
+   	      backgroundColor : "pink",
+          borderColor: "pink"
+     		 };
+ }
+ 
+var workdayStr = function(item){
+	return		{ 
 		  title : item.holidayCategory,
 		  start  : item.date,
 		  allDay: true,
 		  textColor: "black",
 		  backgroundColor : "white",
 		  borderColor: "white"
-	      });
+	      };
+}
+ 
+var workdayStr = function(item){
+	return		{ 
+		  title : item.holidayCategory,
+		  start  : item.date,
+		  allDay: true,
+		  textColor: "black",
+		  backgroundColor : "white",
+		  borderColor: "white"
+	      };
+}
+
+  $.getJSON( url, function(data) {
+  for(var i in data.query.results.json.result.records) {    
+
+    var item = data.query.results.json.result.records[i];   
+
+		if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
+    {
+    	if (item.holidayCategory!="特定節日"){
+      	  holidays.push( holidayStr(item) );        
+      }else{
+      	var myDate= new Date(item.date);	
+      	if(myDate.getDay() == 6 || myDate.getDay() == 0)
+        	 holidays.push( holidayStr(item) );
+         else
+         	holidays.push( workdayStr(item) );
+      }   
+     }else{
+		  		holidays.push( workdayStr(item) );
 	    }
-	}
+}
 
   $('#calendar').fullCalendar({
-	fixedWeekCount: false,
-	contentHeight: 'auto',
+  	contentHeight: 'auto',
   	viewRender: function(view,element) {
     
     	//民國年月
    		 var curDate = 	$('#calendar').fullCalendar('getDate');
       var months = ",1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月".split(",");
-      var year =  (moment(curDate).format('YYYY') -1911)+"年";
+      var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
       var mon =months[ moment(curDate).format('M')];
        
-  		$('.fc-left').empty().append("<h4>"+year+ mon+"</h4>");
+  		$('.fc-left').empty().append("<h2>"+year+ mon+"</h2>");
  		 },
 			events: holidays,
     	eventRender: function (event, element, view) { 
@@ -78,16 +104,13 @@
         // we can apply .format()
         var dateString = event.start.format("YYYY-MM-DD");
         
-	if (event.title!="補行上班日")
-        	$(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
-		
-	$(element).tooltip({title: event.title});           
+        if (event.title!="補行上班日"&&event.title!="特定節日")
+        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
+        
+        $(element).tooltip({title: event.title});   
      }
 		});
-
-
-	});
-  
+});
 });
   </script>
    </head>
