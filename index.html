@@ -32,11 +32,19 @@
   <script>
 
 $(document).ready(function(){
+	
+	      
+	
 	//open data 人事總處行事曆Json
 //var site = "https://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
 var url = "https://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
 	//"https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent('select * from json where url="' + site + '"') + "&format=json"; 
-
+	
+         var jsonp = document.createElement("script");
+                jsonp.type = "text/javascript";
+                jsonp.src = url + "?callback=jsonpCallback";
+                document.getElementsByTagName("head")[0].appendChild(jsonp);
+	
 var holidays = [];
 var holidayStr = function(item){				
   return  { 
