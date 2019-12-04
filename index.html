@@ -75,7 +75,7 @@ var workdayStr = function(item){
 
   $.getJSON( url, function(data) {
 	  
-	  console.log(data);
+	  console.log(data.result.records);
 	  
   for(var i in data.query.results.json.result.records) {    
 
