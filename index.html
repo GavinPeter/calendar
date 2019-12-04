@@ -37,8 +37,8 @@ $(document).ready(function(){
 	
 	//open data 人事總處行事曆Json
 //var site = "https://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
-var url = "382000000A-000077-002.json";
-	//"https://query.yahooapis.com/v1/public/yql?q=" + encodeURIComponent('select * from json where url="' + site + '"') + "&format=json"; 
+var url = "https://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002";
+    //"382000000A-000077-002.json";
 	
 var holidays = [];
 var holidayStr = function(item){				
@@ -72,6 +72,11 @@ var workdayStr = function(item){
 		  borderColor: "white"
 	      };
 }
+jQuery.ajaxPrefilter(function(options) {
+    if (options.crossDomain && jQuery.support.cors) {
+        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
+    }
+});
 
   $.getJSON( url, function(data) {
 	  
