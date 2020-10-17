@@ -41,7 +41,7 @@ var url = "cal.json";
    
     //"382000000A-000077-002.json";
 	
-var holidays = [];
+var caldays = [];
 var holidayStr = function(item){				
   return  { 
           title : item.name,
@@ -64,16 +64,7 @@ var workdayStr = function(item){
 	      };
 }
  
-//var workdayStr = function(item){
-//	return		{ 
-//		  title : item.holidayCategory,
-//		  start  : item.date,
-//		  allDay: true,
-//		  textColor: "black",
-//		  backgroundColor : "white",
-//		  borderColor: "white"
-//	      };
-//}
+
 //jQuery.ajaxPrefilter(function(options) {
 //    if (options.crossDomain && jQuery.support.cors) {
 //        options.url = 'https://cors-anywhere.herokuapp.com/' + options.url;
@@ -88,19 +79,19 @@ var workdayStr = function(item){
 
     var item = data[i];   
 	console.log('each date[i]:' + data[i]);
-		if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
-    {
-    	if (item.holidayCategory!="特定節日"){
-      	  holidays.push( holidayStr(item) );        
-      }else{
-      	var myDate= new Date(item.date);	
-      	if(myDate.getDay() == 6 || myDate.getDay() == 0)
-        	 holidays.push( holidayStr(item) );
-         else
-         	holidays.push( workdayStr(item) );
-      }   
-     }else{
-		  holidays.push( workdayStr(item) );
+	if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
+    	{
+    		if (item.holidayCategory!="特定節日"){
+      	  		caldays.push( holidayStr(item) );        
+      		}else{
+      			var myDate= new Date(item.date);	
+      			if(myDate.getDay() == 6 || myDate.getDay() == 0)
+        	 		caldays.push( holidayStr(item) );
+         		else
+         			caldays.push( workdayStr(item) );
+      		}   
+     	}else{
+		  caldays.push( workdayStr(item) );
 	    }
 }
 
@@ -117,7 +108,7 @@ var workdayStr = function(item){
        
   		$('.fc-left').empty().append("<b>"+year+ mon+"</b>");
  		 },
-			events: holidays,
+			events: caldays,
     	eventRender: function (event, element, view) { 
         // event.start is already a moment.js object
         // we can apply .format()
@@ -136,7 +127,7 @@ var workdayStr = function(item){
    
     <body>
 		<div id='calendar'></div>
-	    	<a href="http://data.ntpc.gov.tw/api/v1/rest/datastore/382000000A-000077-002" target="_blank">來源:新北市政府資料開放平台</a>                                     
+	    	<a href="https://data.ntpc.gov.tw/datasets/308DCD75-6434-45BC-A95F-584DA4FED251" target="_blank">來源:新北市政府資料開放平台</a>                                     
 	</body>
 
 </html>
