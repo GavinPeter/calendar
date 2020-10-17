@@ -122,10 +122,13 @@ $.getJSON( url, function(data) {
       		var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
       		var mon =months[ moment(curDate).format('M')];
        
+		var today = new Date();
+		var dd = String(today.getDate()).padStart(2, '0');
+		var mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+		var yyyy = today.getFullYear();
+		
   		$('.fc-left').empty().append("<b>"+year+ mon+"</b>" + 
-					     "　今天:"+(moment(curDate).format('YYYY') -1911)+'/' +
-					    	moment(curDate).format('MM')+'/' +
-					    	moment(curDate).format('DD'));
+					     "　今天："+(yyyy -1911)+'/' + mm +'/' +dd);
 		
  		 
  	},
