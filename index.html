@@ -88,12 +88,17 @@ $.getJSON( url, function(data) {
 	  
   for(var i in data) {    
 
-    var item = data[i];   
+    let item = data[i];   
 		  
 	if (item.isHoliday=="是")
     	{
-		caldays.push( holidayStr(item) );
-		
+		if (item.holidayCategory=="特定節日"){   
+      			let myDate= new Date(item.date);	
+      			if(myDate.getDay() == 6 || myDate.getDay() == 0)
+        	 		caldays.push( holidayStr(item) );
+         		else
+         			caldays.push( workdayStr(item) );
+      		}
      	}else{
 		if (item.holidayCategory=="補行上班日")
 			caldays.push( makeupdayStr(item) );
@@ -118,16 +123,16 @@ $.getJSON( url, function(data) {
  		 },
 			events: caldays
 	  //,
-    	//eventRender: function (event, element, view) { 
+    	eventRender: function (event, element, view) { 
         // event.start is already a moment.js object
         // we can apply .format()
-        //var dateString = event.start.format("YYYY-MM-DD");
+        var dateString = event.start.format("YYYY-MM-DD");
         
-       // if (event.title!="補行上班日"&&event.title!="特定節日")
-       // $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
+        if (event.title!="補行上班日")
+        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
         
        // $(element).tooltip({title: event.title});   
-     //}
+     	}
 		});
 });
 });
