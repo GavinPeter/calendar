@@ -26,7 +26,7 @@
 		.fc-toolbar.fc-header-toolbar{margin-bottom:0!important }
 	  .fc-today{   
     font-weight: bold;
-    font-size:1.25em;
+    font-size:16pt;
     }	
   </style>
   <script>
@@ -55,6 +55,17 @@ var holidayStr = function(item){
  
 var workdayStr = function(item){
 	return		{ 
+		  title : item.name,
+		  start  : item.date,
+		  allDay: true,
+		  textColor: "black",
+		  backgroundColor : "white",
+		  borderColor: "white"
+	      };
+}
+
+var makeupdayStr = function(item){
+	return		{ 
 		  title : item.holidayCategory,
 		  start  : item.date,
 		  allDay: true,
@@ -71,29 +82,26 @@ var workdayStr = function(item){
 //    }
 //});
 
-  $.getJSON( url, function(data) {	  
+$.getJSON( url, function(data) {	  
 	  
-	  //  console.log('load data:' + data);
+//  console.log('load data:' + data);
 	  
   for(var i in data) {    
 
     var item = data[i];   
-	console.log('each date[i]:' + data[i]);
-	if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
+		  
+	if (item.isHoliday=="是")
     	{
-    		if (item.holidayCategory!="特定節日"){
-      	  		caldays.push( holidayStr(item) );        
-      		}else{
-      			var myDate= new Date(item.date);	
-      			if(myDate.getDay() == 6 || myDate.getDay() == 0)
-        	 		caldays.push( holidayStr(item) );
-         		else
-         			caldays.push( workdayStr(item) );
-      		}   
+		caldays.push( holidayStr(item) );
+		
      	}else{
-		  caldays.push( workdayStr(item) );
+		if (item.holidayCategory=="補行上班日")
+			caldays.push( makeupdayStr(item) );
+		else  
+			caldays.push( workdayStr(item) );
 	    }
-}
+	  
+	}//end for
 
   $('#calendar').fullCalendar({
 	fixedWeekCount: false,
@@ -108,17 +116,18 @@ var workdayStr = function(item){
        
   		$('.fc-left').empty().append("<b>"+year+ mon+"</b>");
  		 },
-			events: caldays,
-    	eventRender: function (event, element, view) { 
+			events: caldays
+	  //,
+    	//eventRender: function (event, element, view) { 
         // event.start is already a moment.js object
         // we can apply .format()
-        var dateString = event.start.format("YYYY-MM-DD");
+        //var dateString = event.start.format("YYYY-MM-DD");
         
-        if (event.title!="補行上班日"&&event.title!="特定節日")
-        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
+       // if (event.title!="補行上班日"&&event.title!="特定節日")
+       // $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
         
-        $(element).tooltip({title: event.title});   
-     }
+       // $(element).tooltip({title: event.title});   
+     //}
 		});
 });
 });
