@@ -114,15 +114,14 @@ $.getJSON( url, function(data) {
   	viewRender: function(view,element) {
     
     	//民國年月
-   		 var curDate = 	$('#calendar').fullCalendar('getDate');
-      var months = ",1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月".split(",");
-      var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
-      var mon =months[ moment(curDate).format('M')];
+   		var curDate = 	$('#calendar').fullCalendar('getDate');
+      		var months = ",1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月".split(",");
+      		var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
+      		var mon =months[ moment(curDate).format('M')];
        
   		$('.fc-left').empty().append("<b>"+year+ mon+"</b>");
  		 },
-			events: caldays
-	  //,
+	events: caldays,
     	eventRender: function (event, element, view) { 
         // event.start is already a moment.js object
         // we can apply .format()
