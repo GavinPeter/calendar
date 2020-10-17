@@ -127,7 +127,7 @@ $.getJSON( url, function(data) {
 
 		
   		$('.fc-left').empty().append("<b>"+year+ mon+"</b>" + 
-					     "　今天："+(yyyy -1911)+'/' + (today.getMonth() + 1) +'/' +today.getDate()+
+					     "　今天："+(today.getFullYear() -1911)+'/' + (today.getMonth() + 1) +'/' +today.getDate()+
 						'(' + weekdays[today.getDay()] +')' );
 		
  		 
