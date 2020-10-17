@@ -121,11 +121,12 @@ $.getJSON( url, function(data) {
       		var months = ",1月,2月,3月,4月,5月,6月,7月,8月,9月,10月,11月,12月".split(",");
       		var year = "民國"+ (moment(curDate).format('YYYY') -1911)+"年";
       		var mon =months[ moment(curDate).format('M')];
-		var day = moment(curDate).format('DD');
-
        
-  		$('.fc-left').empty().append("<b>"+year+ mon+"</b>");
-		$('.fc-right').prepend( year+'/'+ mon +'/'+ day  );
+  		$('.fc-left').empty().append("<b>"+year+ mon+"</b>" + 
+					     "　今天:"+(moment(curDate).format('YYYY') -1911)+'/' +
+					    	moment(curDate).format('MM')+'/' +
+					    	moment(curDate).format('DD'));
+		
  		 
  	},
 	events: caldays,
@@ -134,8 +135,9 @@ $.getJSON( url, function(data) {
         // we can apply .format()
         var dateString = event.start.format("YYYY-MM-DD");
         
-        if (event.title!="補行上班日")
-        $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
+        //if (event.title!="補行上班日")
+	if (event.textColor=="red")
+        	$(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
         
        // $(element).tooltip({title: event.title});   
      	}
