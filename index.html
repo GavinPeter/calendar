@@ -23,7 +23,7 @@
 	h2 {
 		text-align: center;
 	}
-		.fc-toolbar.fc-header-toolbar{margin-bottom:0!important }
+	//	.fc-toolbar.fc-header-toolbar{margin-bottom:0!important }
 	  .fc-today{   
     font-weight: bold;
     font-size:16pt;
@@ -122,7 +122,7 @@ $.getJSON( url, function(data) {
   		$('.fc-left').empty().append("<b>"+year+ mon+"</b>");
  		 },
 	events: caldays,
-    	eventRender: function (event, element, view) { 
+    	/*eventRender: function (event, element, view) { 
         // event.start is already a moment.js object
         // we can apply .format()
         var dateString = event.start.format("YYYY-MM-DD");
@@ -131,7 +131,7 @@ $.getJSON( url, function(data) {
         $(view.el[0]).find('.fc-day[data-date=' + dateString + ']').css('background-color', 'pink');
         
        // $(element).tooltip({title: event.title});   
-     	}
+     	}*/
 		});
 });
 });
