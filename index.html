@@ -126,8 +126,9 @@ $.getJSON( url, function(data) {
 		var weekdays = "日,一,二,三,四,五,六".split(",");
 
 		
-  		$('.fc-left').empty().append("<b>"+year+ mon+"</b>" + 
-					     "　今天："+(today.getFullYear() -1911)+'/' + (today.getMonth() + 1) +'/' +today.getDate()+
+  		$('.fc-left').empty().append("<b>"+year+ mon+"</b>" );
+		
+		$('.fc-today-button').html("今天："+(today.getFullYear() -1911)+'/' + (today.getMonth() + 1) +'/' +today.getDate()+
 						'(' + weekdays[today.getDay()] +')' );
 		
  		 
