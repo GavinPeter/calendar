@@ -82,11 +82,11 @@ var workdayStr = function(item){
   $.getJSON( url, function(data) {
 	  
 
-	  console.log('load data:' + data);
+	  console.log('load data:' + data[0]);
 	  
   for(var i in data) {    
 
-    var item = data[i];   
+    var item = data[0][i];   
 	console.log('each date[i]:' + data[i]);
 		if (item.isHoliday=="是")//&&item.holidayCategory!="特定節日")
     {
