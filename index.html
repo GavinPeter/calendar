@@ -13,7 +13,7 @@
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/locale/zh-tw.js"></script>
 	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/hammer.js/2.0.8/hammer.min.js"></script>
+	<script src="//cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.18/jquery.touchSwipe.min.js"></script>
 	<style type="text/css">
 	
 	.fc-widget-header .fc-sat,
@@ -37,39 +37,6 @@
 	}
   </style>
   <script>
-
-            (function (factory) {
-                if (typeof define === 'function' && define.amd) {
-                    define(['jquery', 'hammerjs'], factory);
-                } else if (typeof exports === 'object') {
-                    factory(require('jquery'), require('hammerjs'));
-                } else {
-                    factory(jQuery, Hammer);
-                }
-            }(function ($, Hammer) {
-                function hammerify(el, options) {
-                    var $el = $(el);
-                    if (!$el.data("hammer")) {
-                        $el.data("hammer", new Hammer($el[0], options));
-                    }
-                }
-                $.fn.hammer = function (options) {
-                    return this.each(function () {
-                        hammerify(this, options);
-                    });
-                };
-
-                // extend the emit method to also trigger jQuery events
-                Hammer.Manager.prototype.emit = (function (originalEmit) {
-                    return function (type, data) {
-                        originalEmit.call(this, type, data);
-                        $(this.element).trigger({
-                            type: type,
-                            gesture: data
-                        });
-                    };
-                })(Hammer.Manager.prototype.emit);
-            }));
 	  
 $(document).ready(function(){
 	
@@ -187,13 +154,16 @@ $.getJSON( url, function(data) {
      	}
 		});
 	
-	    //Hammer Js swipe
-                $('#calendar').hammer().on("swipeleft", function (event) {
-                    $('#calendar').fullCalendar('next');
-                });
-                $('#calendar').hammer().on("swiperight", function (event) {
-                    $('#calendar').fullCalendar('prev');
-                });
+	   $('#calendar').swipe( {
+    	//Generic swipe handler for all directions
+    		swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
+			if (direction=="left")
+			  $('#calendar').fullCalendar('prev');
+			if (direction=="right")
+			 $('#calendar').fullCalendar('next');
+ 	   	}
+	});
+	
 });
 });
   </script>
