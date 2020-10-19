@@ -158,9 +158,9 @@ $.getJSON( url, function(data) {
     	//Generic swipe handler for all directions
     		swipe:function(event, direction, distance, duration, fingerCount, fingerData) {
 			if (direction=="left")
-			  $('#calendar').fullCalendar('prev');
+			  $('#calendar').fullCalendar('next');
 			if (direction=="right")
-			 $('#calendar').fullCalendar('next');
+			 $('#calendar').fullCalendar('prev');
  	   	}
 	});
 	
