@@ -189,11 +189,11 @@ $.getJSON( url, function(data) {
 		});
 	
 	    //Hammer Js swipe
-                calendar.hammer().on("swipeleft", function (event) {
-                    calendar.fullCalendar('next');
+                $('#calendar').hammer().on("swipeleft", function (event) {
+                    $('#calendar').fullCalendar('next');
                 });
-                calendar.hammer().on("swiperight", function (event) {
-                    calendar.fullCalendar('prev');
+                $('#calendar').hammer().on("swiperight", function (event) {
+                    $('#calendar').fullCalendar('prev');
                 });
 });
 });
