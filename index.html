@@ -6,16 +6,21 @@
     <meta name="description" content="中華民國，政府，行政，機關，辦公日曆">
 	<meta name="keywords" content="行政機關辦公日曆表">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" />	
+	<!--link rel="stylesheet" type="text/css" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" /-->	
 	<link rel="stylesheet" type="text/css" href="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.css" />
 	<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.9.0/moment.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/fullcalendar.min.js"></script>
 	<script src="//cdnjs.cloudflare.com/ajax/libs/fullcalendar/3.8.0/locale/zh-tw.js"></script>
-	<script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<!--script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script-->
 	<script src="//cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.18/jquery.touchSwipe.min.js"></script>
 	<style type="text/css">
 	
+	#calendar{
+		margin:0 auto;
+		width: 860px;
+	}	
+		
 	.fc-widget-header .fc-sat,
 	.fc-widget-header .fc-sun{
 		color:red;
@@ -170,8 +175,10 @@ $.getJSON( url, function(data) {
    </head>
    
     <body>
-		<div id='calendar'></div>
-	    	<a href="https://data.ntpc.gov.tw/datasets/308DCD75-6434-45BC-A95F-584DA4FED251" target="_blank">來源:新北市政府資料開放平台</a>                                     
+		<div id='calendar'>
+			<a href="https://data.ntpc.gov.tw/datasets/308DCD75-6434-45BC-A95F-584DA4FED251" target="_blank">來源:新北市政府資料開放平台</a> 
+	    	</div>
+	    	                                    
 	</body>
 
 </html>
