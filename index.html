@@ -16,10 +16,12 @@
 	<script src="//cdn.jsdelivr.net/npm/jquery-touchswipe@1.6.18/jquery.touchSwipe.min.js"></script>
 	<style type="text/css">
 	
-	#calendar{
-		margin:0 auto;
-		width: 860px;
-	}	
+	@media screen and (min-width: 860px) {
+		#calendar{
+			margin:0 auto;
+			width: 860px;
+		}	
+	}
 		
 	.fc-widget-header .fc-sat,
 	.fc-widget-header .fc-sun{
@@ -29,7 +31,7 @@
 
 	.fc-today{   
     		font-weight: bold;
-    		font-size:2em;
+    		font-size:1.5em;
 		color:purple;
     	}
 		
